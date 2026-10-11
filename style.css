@@ -8,6 +8,7 @@
           --border: #38383a; --accent: #0a84ff; --danger: #ff453a; }
 }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 [hidden] { display: none !important; }
 body {
   margin: 0; background: var(--bg); color: var(--text);
@@ -54,3 +55,17 @@ button.link { border: none; background: none; padding: 8px 0; margin-top: 16px; 
 .tools button { display: block; width: 100%; margin-top: 8px; text-align: left; }
 #status { min-height: 1.4em; color: var(--muted); font-size: 14px; text-align: center; }
 #status.error { color: var(--danger); }
+
+/* Телефоны: компактнее. Поля ввода не меньше 16px — иначе iOS увеличивает страницу при фокусе */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  main { padding: 16px 12px 32px; }
+  h1 { font-size: 22px; margin: 4px 0 12px; }
+  h2 { font-size: 18px; margin-bottom: 8px; }
+  input, textarea { font-size: 16px; padding: 8px 10px; }
+  button { font-size: 14px; padding: 7px 10px; }
+  label, .hint, #status, .field .label { font-size: 13px; }
+  .field code { font-size: 15px; }
+  .field .label { width: 48px; }
+  #card { padding: 12px; }
+}
