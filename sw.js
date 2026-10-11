@@ -1,6 +1,6 @@
 // Кэш файлов приложения, чтобы оно работало без интернета.
 // При изменении любого файла увеличьте номер версии.
-const CACHE = 'pswd-v8';
+const CACHE = 'pswd-v9';
 const FILES = ['./', 'index.html', 'app.js', 'crypto.js', 'style.css', 'manifest.json',
                'icon-180.png', 'icon-192.png', 'icon-512.png'];
 
