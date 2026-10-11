@@ -49,6 +49,7 @@ button.link { border: none; background: none; padding: 8px 0; margin-top: 16px; 
 .field .label { color: var(--muted); font-size: 14px; width: 60px; }
 .field code { flex: 1; min-width: 0; word-break: break-all; font-size: 16px; user-select: all; -webkit-user-select: all; }
 .field code.masked { -webkit-text-security: disc; filter: blur(5px); user-select: none; -webkit-user-select: none; }
+.field code.masked { white-space: nowrap; overflow: hidden; word-break: normal; }
 .note { color: var(--muted); white-space: pre-wrap; word-break: break-word; }
 .tools { margin-top: 24px; }
 .tools summary { color: var(--muted); cursor: pointer; padding: 8px 0; }
