@@ -3,6 +3,7 @@ import { createSession, seal, open, parseVault, generatePassword } from './crypt
 const STORAGE_KEY = 'pswd-vault';
 const AUTO_LOCK_MS = 3 * 60 * 1000;   // блокировка после 3 минут бездействия
 const CLIPBOARD_CLEAR_MS = 30 * 1000; // попытка очистить буфер обмена через 30 секунд
+const VERSION = 6;                    // меняется вместе с CACHE в sw.js
 
 const $ = id => document.getElementById(id);
 
@@ -353,6 +354,8 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) lockN
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+
+$('app-version').textContent = 'Версия ' + VERSION;
 
 if (!window.isSecureContext || !crypto.subtle) {
   document.querySelector('main').textContent = 'Откройте приложение по адресу https:// (или http://localhost) — иначе браузер не даёт доступ к шифрованию.';
