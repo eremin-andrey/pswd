@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#1f2937">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Пароли">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Пароли</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+
+  <!-- Создание нового хранилища -->
+  <section id="screen-setup" hidden>
+    <h1>Новое хранилище</h1>
+    <p class="hint">Придумайте мастер-пароль. Его нельзя восстановить: забудете — данные будут потеряны.</p>
+    <form id="form-setup">
+      <label>Мастер-пароль<input type="password" id="setup-pw" autocomplete="new-password" required minlength="10"></label>
+      <label>Ещё раз<input type="password" id="setup-pw2" autocomplete="new-password" required></label>
+      <button type="submit" class="primary">Создать</button>
+    </form>
+    <p class="hint">Уже есть файл хранилища с другого устройства?</p>
+    <button type="button" data-action="import">Импортировать файл</button>
+  </section>
+
+  <!-- Вход -->
+  <section id="screen-lock" hidden>
+    <h1>🔒 Пароли</h1>
+    <form id="form-unlock">
+      <label>Мастер-пароль<input type="password" id="unlock-pw" autocomplete="current-password" required></label>
+      <button type="submit" class="primary">Открыть</button>
+    </form>
+    <button type="button" class="link" data-action="import">Заменить хранилище файлом…</button>
+  </section>
+
+  <!-- Поиск и просмотр -->
+  <section id="screen-main" hidden>
+    <div class="row">
+      <input type="search" id="search" placeholder="Сайт, устройство или служба" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button type="button" class="primary" id="btn-add" title="Добавить">＋</button>
+    </div>
+    <ul id="list"></ul>
+
+    <div id="card" hidden>
+      <h2 id="card-name"></h2>
+      <div class="field"><span class="label">Логин</span><code id="card-login"></code><button type="button" data-copy="login">Копировать</button></div>
+      <div class="field"><span class="label">Пароль</span><code id="card-password" class="masked"></code><button type="button" id="btn-reveal">Показать</button><button type="button" data-copy="password">Копировать</button></div>
+      <p id="card-note" class="note"></p>
+      <div class="row">
+        <button type="button" id="btn-edit">Изменить</button>
+        <button type="button" id="btn-delete" class="danger">Удалить</button>
+      </div>
+    </div>
+
+    <details class="tools">
+      <summary>Файл и настройки</summary>
+      <button type="button" id="btn-export">Сохранить файл хранилища</button>
+      <button type="button" data-action="import">Импортировать файл</button>
+      <button type="button" id="btn-change-pw">Сменить мастер-пароль</button>
+      <p id="vault-location" class="hint">Данные хранятся в браузере этого устройства</p>
+    </details>
+    <button type="button" id="btn-lock" class="link">Заблокировать</button>
+  </section>
+
+  <!-- Добавление / изменение записи -->
+  <section id="screen-edit" hidden>
+    <h1 id="edit-title">Новая запись</h1>
+    <form id="form-edit">
+      <label>Название<input id="edit-name" required autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+      <label>Логин<input id="edit-login" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+      <label>Пароль
+        <span class="row"><input id="edit-password" autocomplete="off" autocapitalize="off" spellcheck="false" class="mono"><button type="button" id="btn-generate">Сгенерировать</button></span>
+      </label>
+      <label>Заметка<textarea id="edit-note" rows="3"></textarea></label>
+      <div class="row">
+        <button type="submit" class="primary">Сохранить</button>
+        <button type="button" id="btn-cancel">Отмена</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Смена мастер-пароля -->
+  <section id="screen-change" hidden>
+    <h1>Смена мастер-пароля</h1>
+    <form id="form-change">
+      <label>Новый мастер-пароль<input type="password" id="change-pw" autocomplete="new-password" required minlength="10"></label>
+      <label>Ещё раз<input type="password" id="change-pw2" autocomplete="new-password" required></label>
+      <div class="row">
+        <button type="submit" class="primary">Сменить</button>
+        <button type="button" id="btn-change-cancel">Отмена</button>
+      </div>
+    </form>
+  </section>
+
+  <p id="status" role="status"></p>
+  <input type="file" id="file-import" accept=".txt,.json,text/plain,application/json" hidden>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
