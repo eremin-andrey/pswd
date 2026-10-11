@@ -1,11 +1,14 @@
 // Кэш файлов приложения, чтобы оно работало без интернета.
 // При изменении любого файла увеличьте номер версии.
-const CACHE = 'pswd-v7';
+const CACHE = 'pswd-v8';
 const FILES = ['./', 'index.html', 'app.js', 'crypto.js', 'style.css', 'manifest.json',
                'icon-180.png', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
+  // cache: 'reload' — мимо HTTP-кэша браузера, иначе новая версия может сохранить старые файлы
+  e.waitUntil(caches.open(CACHE)
+    .then(c => c.addAll(FILES.map(f => new Request(f, { cache: 'reload' }))))
+    .then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', e => {

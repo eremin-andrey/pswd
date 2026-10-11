@@ -3,7 +3,7 @@ import { createSession, seal, open, parseVault, generatePassword } from './crypt
 const STORAGE_KEY = 'pswd-vault';
 const AUTO_LOCK_MS = 3 * 60 * 1000;   // блокировка после 3 минут бездействия
 const CLIPBOARD_CLEAR_MS = 30 * 1000; // попытка очистить буфер обмена через 30 секунд
-const VERSION = 7;                    // меняется вместе с CACHE в sw.js
+const VERSION = 8;                    // меняется вместе с CACHE в sw.js
 
 const $ = id => document.getElementById(id);
 
